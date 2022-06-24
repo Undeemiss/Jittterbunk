@@ -1,0 +1,29 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'bunk/style.css' %}">
+
+{% if error %}
+    <p>{{error}}</p>
+{% endif %}
+
+
+<form action="{% url 'bunk:bunk_submit' user.id %}" method="post">
+    {% csrf_token %}
+    <p>Bunk {{ user.username }} by entering your username!</p>
+    <input type="text" name="from_username" id="from_username">
+    <input type="submit" value="Bunk!">
+</form>
+
+
+<br>
+
+
+<p>{{ user.username }}'s bunks:</p>
+<ul>
+    {% if bunk_list %}
+        {% for bunk in bunk_list %}
+        <p>Bunked by {{ bunk.from_user }} at {{ bunk.time }}!</p>
+        {% endfor %}
+    {% else %}
+        <p>This user hasn't been bunked yet! Why not be the first?</p>
+    {% endif %}
+</ul>
