@@ -1,0 +1,14 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+
+<p></p>
+
+{% if bunk_list %}
+    <ul>
+    {% for bunk in bunk_list %}
+       <p>{{ bunk.from_user }} bunked {{ bunk.to_user }} at {{ bunk.time }}!</p>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No bunks to show.</p>
+{% endif %}
