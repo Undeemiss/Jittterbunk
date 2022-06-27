@@ -16,6 +16,9 @@ class GlobalFeed(generic.ListView):
     def get_queryset(self):
         return Bunk.objects.order_by('-time')
 
+def redirect_user_feed(request, user_id):
+    return HttpResponseRedirect(reverse('bunk:user_feed', args=(user_id,)))
+
 # List of a user's received bunks
 def user_feed(request, user_id, error=None):
     user = get_object_or_404(User, pk=user_id)
